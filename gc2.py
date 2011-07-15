@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # Google Calendar Command Line Quick-Add v0.1.0
-# Copyright 2011 Chevee Dodd
-"""Command line utility utilizing Google Calendar Quick-Add API."""
+# 2011 Chevee Dodd
+"""Command line utility utilizing Google Calendar API."""
 
 import gdata.calendar.service
 import gdata.service
