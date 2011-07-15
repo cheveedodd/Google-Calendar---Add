@@ -43,6 +43,9 @@ it.  If you make a ton of money, I'd like some credit...
 
 INSTALL
 -------
+You must have the Google Calendar API for Python installed. 
+  http://code.google.com/p/gdata-python-client/downloads/list 
+
 1. Copy gc2.py to any directory
 2. mkdir /data in working directory
 3. create work.log file in working directory.  This file must contain the Google
