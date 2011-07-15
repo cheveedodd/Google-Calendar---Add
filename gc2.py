@@ -28,11 +28,11 @@ def gTitle():
     a_Title = ''
     while (a_Title == ''):
         a_Title = raw_input('Title? > ')
-    
+
     return a_Title
 
 def gDate():
-    # Get date from user  
+    # Get date from user
     # Format as yyyy-mm-dd
     # Return current date if nothing is entered.
     #
@@ -60,21 +60,22 @@ def gTime():
         return ''
     else:
         e_Time = raw_input('End time? > ')
-    
+
     #convert input to HH:mm:ss
     s_Time = '%s:%s:00' % (s_Time[:2], s_Time[2:])
-    e_Time = '%s:%s:00' % (e_Time[:2], e_Time[2:])    
+    e_Time = '%s:%s:00' % (e_Time[:2], e_Time[2:])
 
     a_Time = '%s %s' % (s_Time, e_Time)
     return a_Time
 
 def gAdd(calendar_service, title, start_time, end_time):
 	# I ripped this straight from Google examples
+    # I'm sure it could be done differently.
     event = gdata.calendar.CalendarEventEntry()
     event.title = atom.Title(text=title)
     event.when.append(gdata.calendar.When(start_time=start_time, end_time=end_time))
     calendar_service.ProgrammaticLogin()
-        
+
     # Send the request and receive the response:
     new_event = calendar_service.InsertEvent(event, '/calendar/feeds/default/private/full')
 
@@ -90,7 +91,7 @@ def gAdd(calendar_service, title, start_time, end_time):
 
 
 # This is where some sort of MAIN function should begin.  I know that I
-# am supposed to use that, but I've never bothered to learn how.  
+# am supposed to use that, but I've never bothered to learn how.
 
 # Build Google login information
 a_Creds = gInfo()
