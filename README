@@ -39,3 +39,12 @@ LICENSE
 This project is officially Do With It What You Will.  If you do want to work on 
 it, I'd appreciate help, otherwise, if you find anything useful in here, have at
 it.  If you make a ton of money, I'd like some credit...
+
+
+INSTALL
+-------
+1. Copy gc2.py to any directory
+2. mkdir /data in working directory
+3. create work.log file in working directory.  This file must contain the Google
+   email address associated with the account on the first line and the password
+   on the second line.  Both of these need to be encoded in base64 first.
