@@ -1,0 +1,41 @@
+Google Calendar Quick
+ - Chevee Dodd
+ e: cheveedodd at gmail dot com
+
+
+VERSION INFORMATION
+-------------------
+
+Initial commit - 0.0.1
+
+Developmental version
+
+
+FEATURES
+--------
+
+Offers Google Calendar event adding through simple command line interface.
+Uses base64 encodig for username/password stored in individual log files.
+
+
+NOTES
+-----
+
+This is currently a personal project that is not intended to replace Google CLI
+or any other tool.  It is a learning experience as I return to coding.  There
+are parts of the code that are poorly written and I gladly accept feedback.
+
+In the future, I hope to include:
+  - error handling (currently there is exactly zero)
+  - passable argument for multiple calendar support (or a menu)
+  - intelligent date/time processing that accepts multiple input formats
+  - automatic log generation if none is present
+  - automatic log control for oversize logs or by date
+
+
+LICENSE
+-------
+
+This project is officially Do With It What You Will.  If you do want to work on 
+it, I'd appreciate help, otherwise, if you find anything useful in here, have at
+it.  If you make a ton of money, I'd like some credit...
