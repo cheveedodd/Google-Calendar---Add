@@ -90,32 +90,33 @@ def gAdd(calendar_service, title, start_time, end_time):
     out_File.close()
 
 
-# This is where some sort of MAIN function should begin.  I know that I
-# am supposed to use that, but I've never bothered to learn how.
+# Start with the new fancy __name__ thingy
 
-# Build Google login information
-a_Creds = gInfo()
-calendar_service = gdata.calendar.service.CalendarService()
-calendar_service.email = base64.b64decode(a_Creds[0])
-calendar_service.password = base64.b64decode(a_Creds[1])
-calendar_service.source = 'gc2.py'
+if __name__ == '__main__':
 
-#Get calendar information from user
-print '\n\n\nGoogle Calendar Add Event:\n'
-xTitle = str(gTitle())
-xDate = str(gDate())
-rTime = str(gTime())
-if rTime > "":
-    xTime = rTime.split()
-    sTime = "%sT%s" % (xDate, str(xTime[0]))
-    eTime = "%sT%s" % (xDate, str(xTime[1]))
-else:
-    sTime = xDate
-    eTime = xDate
+    # Build Google login information
+    a_Creds = gInfo()
+    calendar_service = gdata.calendar.service.CalendarService()
+    calendar_service.email = base64.b64decode(a_Creds[0])
+    calendar_service.password = base64.b64decode(a_Creds[1])
+    calendar_service.source = 'gc2.py'
 
-#Add calendar event
-gAdd(calendar_service, xTitle, sTime, eTime)
+    #Get calendar information from user
+    print '\n\n\nGoogle Calendar Add Event:\n'
+    xTitle = str(gTitle())
+    xDate = str(gDate())
+    rTime = str(gTime())
+    if rTime > "":
+        xTime = rTime.split()
+        sTime = "%sT%s" % (xDate, str(xTime[0]))
+        eTime = "%sT%s" % (xDate, str(xTime[1]))
+    else:
+        sTime = xDate
+        eTime = xDate
+
+    #Add calendar event
+    gAdd(calendar_service, xTitle, sTime, eTime)
 
 
-print xTitle, sTime, eTime
-print "\nEnd of line."
+    print xTitle, sTime, eTime
+    print "\nEnd of line."
