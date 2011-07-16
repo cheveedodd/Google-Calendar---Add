@@ -12,10 +12,10 @@ import base64
 import time
 
 def gInfo():
-    # Get login information from log file
-    #
-    # future plans include passable argument to replace 'work.log' or
-    # a menu system for selecting calendars.  Also - error handling
+    """Get login information from log file.
+
+    Future plans include passable argument to replace 'work.log' or
+    a menu system for selecting calendars.  Also - error handling"""
     in_File = open('./data/work.log', 'r')
     a_Email = in_File.readline()
     a_Pass = in_File.readline()
@@ -23,8 +23,9 @@ def gInfo():
     return a_Email, a_Pass
 
 def gTitle():
-    # Get calendar Title from user
-    # Format as raw to allow time and date entry.
+    """Get calendar Title from user.
+
+    Format as raw to allow time and date entry."""
     a_Title = ''
     while (a_Title == ''):
         a_Title = raw_input('Title? > ')
@@ -32,15 +33,16 @@ def gTitle():
     return a_Title
 
 def gDate():
-    # Get date from user
-    # Format as yyyy-mm-dd
-    # Return current date if nothing is entered.
-    #
-    # Future plans are to include functions to parse various formats
-    # instead of a forced format.  I like Googles quick-add parsing but
-    # it prevents me from puting dates or times in the event title
-    # without enclosing it in quotes - which would be fine if the quotes
-    # were stripped out by the quick-add function.
+    """Get date from user
+
+    Input format must be yyyy-mm-dd
+    Return current date if nothing is entered.
+
+    Future plans are to include functions to parse various formats
+    instead of a forced format.  I like Googles quick-add parsing but
+    it prevents me from puting dates or times in the event title
+    without enclosing it in quotes - which would be fine if the quotes
+    were stripped out by the quick-add function."""
     a_Day = raw_input('Day? YYYY-MM-DD [Today] > ')
 
     while (a_Day == ""):
@@ -49,11 +51,12 @@ def gDate():
     return a_Day
 
 def gTime():
-    # Get time from user
-    # Format as HH:MM:SS
-    # Return empty if nothing is entered.
-    #
-    # Future plans are automatic parsing of different input formats.
+    """Get time from user
+
+    Input format must be either HH:MM:SS or HH:MM
+    Return empty if nothing is entered.
+
+    Future plans are automatic parsing of different input formats."""
     print 'Enter times in 24 hour format: HHmm'
     s_Time = raw_input('Start time? [All day] > ')
     if s_Time == '':
@@ -69,8 +72,11 @@ def gTime():
     return a_Time
 
 def gAdd(calendar_service, title, start_time, end_time):
-	# I ripped this straight from Google examples
-    # I'm sure it could be done differently.
+    """Generate calendar event and send to Google
+
+    This is ripped this straight from Google examples.  I'm sure it
+    could be done differently.  The URLs are appended to the log file
+    containing the user data."""
     event = gdata.calendar.CalendarEventEntry()
     event.title = atom.Title(text=title)
     event.when.append(gdata.calendar.When(start_time=start_time, end_time=end_time))
@@ -89,11 +95,15 @@ def gAdd(calendar_service, title, start_time, end_time):
     out_File.write('\n')
     out_File.close()
 
+def main():
+    """Google Calendar Quick v0.1.0
 
-# Start with the new fancy __name__ thingy
-
-if __name__ == '__main__':
-
+    This utility is designed to add an event to Google Calendar with a
+    minimal amount of effort.  User login information is stored in a
+    log file with base64 encoding and is retreived with the program is
+    executed.  This file must be in ./data and named work.log.  The
+    first line must contain the users email and the second line must
+    contain the users password.  Both must be encoded in base64."""
     # Build Google login information
     a_Creds = gInfo()
     calendar_service = gdata.calendar.service.CalendarService()
@@ -120,3 +130,7 @@ if __name__ == '__main__':
 
     print xTitle, sTime, eTime
     print "\nEnd of line."
+
+
+if __name__ == '__main__':
+    main()
