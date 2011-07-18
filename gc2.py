@@ -11,7 +11,7 @@ import atom
 import base64
 import time
 
-def gInfo():
+def load_credentials():
     """Get login information from log file.
 
     Future plans include passable argument to replace 'work.log' or
@@ -22,7 +22,7 @@ def gInfo():
     in_File.close()
     return a_Email, a_Pass
 
-def gTitle():
+def get_title():
     """Get calendar Title from user.
 
     Format as raw to allow time and date entry."""
@@ -32,7 +32,7 @@ def gTitle():
 
     return a_Title
 
-def gDate():
+def get_date():
     """Get date from user
 
     Input format must be yyyy-mm-dd
@@ -50,7 +50,7 @@ def gDate():
 
     return a_Day
 
-def gTime():
+def get_time():
     """Get time from user
 
     Input format must be either HH:MM:SS or HH:MM
@@ -71,7 +71,7 @@ def gTime():
     a_Time = '%s %s' % (s_Time, e_Time)
     return a_Time
 
-def gAdd(calendar_service, title, start_time, end_time):
+def add_event(calendar_service, title, start_time, end_time):
     """Generate calendar event and send to Google
 
     This is ripped this straight from Google examples.  I'm sure it
@@ -105,7 +105,7 @@ def main():
     first line must contain the users email and the second line must
     contain the users password.  Both must be encoded in base64."""
     # Build Google login information
-    a_Creds = gInfo()
+    a_Creds = load_credentials()
     calendar_service = gdata.calendar.service.CalendarService()
     calendar_service.email = base64.b64decode(a_Creds[0])
     calendar_service.password = base64.b64decode(a_Creds[1])
@@ -113,9 +113,9 @@ def main():
 
     #Get calendar information from user
     print '\n\n\nGoogle Calendar Add Event:\n'
-    xTitle = str(gTitle())
-    xDate = str(gDate())
-    rTime = str(gTime())
+    xTitle = get_title()
+    xDate = get_date()
+    rTime = get_time()
     if rTime > "":
         xTime = rTime.split()
         sTime = "%sT%s" % (xDate, str(xTime[0]))
@@ -125,7 +125,7 @@ def main():
         eTime = xDate
 
     #Add calendar event
-    gAdd(calendar_service, xTitle, sTime, eTime)
+    add_event(calendar_service, xTitle, sTime, eTime)
 
 
     print xTitle, sTime, eTime
