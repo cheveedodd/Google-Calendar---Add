@@ -12,14 +12,20 @@ import base64
 import time
 
 def load_credentials():
-    """Get login information from log file.
+    """Get login information from credentials.cml.
 
-    Future plans include passable argument to replace 'work.log' or
-    a menu system for selecting calendars.  Also - error handling"""
-    in_File = open('./data/work.log', 'r')
-    username = in_File.readline()
-    password = in_File.readline()
-    in_File.close()
+    Future plans include passable argument to replace 'WORK' or a
+    menu system for selecting different accounts.  Also - error
+    handling.  CML = Credentials Markup Language - because I can."""
+    with open('./data/credentials.cml', 'r') as f:
+        line = f.readline()
+        while line:
+            if line.strip() == "WORK"():
+                username = f.readline()
+                password = f.readline()
+            print one, two
+        line = f.readline()
+
     return username, password
 
 def get_title():
