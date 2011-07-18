@@ -123,8 +123,8 @@ def main():
         event_start = input_date
         event_end = input_date
     else:
-		event_start = "%sT%s" % (input_date, start_time)
-		event_end = "%sT%s" % (input_date, end_time)
+        event_start = "%sT%s" % (input_date, start_time)
+        event_end = "%sT%s" % (input_date, end_time)
 
     #Add calendar event
     add_event(calendar_service, input_title, event_start, event_end)
