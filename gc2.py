@@ -17,18 +17,18 @@ def load_credentials():
     Future plans include passable argument to replace 'work.log' or
     a menu system for selecting calendars.  Also - error handling"""
     in_File = open('./data/work.log', 'r')
-    a_Email = in_File.readline()
-    a_Pass = in_File.readline()
+    username = in_File.readline()
+    password = in_File.readline()
     in_File.close()
-    return a_Email, a_Pass
+    return username, password
 
 def get_title():
     """Get calendar Title from user.
 
     Format as raw to allow time and date entry."""
-    a_Title = ''
-    while (a_Title == ''):
-        a_Title = raw_input('Title? > ')
+    title = ''
+    while (title == ''):
+        title = raw_input('Title? > ')
 
     return a_Title
 
@@ -43,12 +43,12 @@ def get_date():
     it prevents me from puting dates or times in the event title
     without enclosing it in quotes - which would be fine if the quotes
     were stripped out by the quick-add function."""
-    a_Day = raw_input('Day? YYYY-MM-DD [Today] > ')
+    input_day = raw_input('Day? YYYY-MM-DD [Today] > ')
 
-    while (a_Day == ""):
-        a_Day = "%s-%s-%s" % (str(time.strftime('%Y')), str(time.strftime('%m')), str(time.strftime('%d')))
+    if not input_day:
+        input_day = time.strftime('%Y-%m-%d')
 
-    return a_Day
+    return input_day
 
 def get_time():
     """Get time from user
@@ -58,18 +58,17 @@ def get_time():
 
     Future plans are automatic parsing of different input formats."""
     print 'Enter times in 24 hour format: HHmm'
-    s_Time = raw_input('Start time? [All day] > ')
-    if s_Time == '':
+    start_time = raw_input('Start time? [All day] > ')
+    if not start_time:
         return ''
     else:
-        e_Time = raw_input('End time? > ')
+        end_time = raw_input('End time? > ')
 
     #convert input to HH:mm:ss
-    s_Time = '%s:%s:00' % (s_Time[:2], s_Time[2:])
-    e_Time = '%s:%s:00' % (e_Time[:2], e_Time[2:])
+    start_time = '%s:%s:00' % (start_time[:2], start_time[2:])
+    end_time = '%s:%s:00' % (end_time[:2], end_time[2:])
 
-    a_Time = '%s %s' % (s_Time, e_Time)
-    return a_Time
+    return start_time, end_time
 
 def add_event(calendar_service, title, start_time, end_time):
     """Generate calendar event and send to Google
@@ -113,19 +112,18 @@ def main():
 
     #Get calendar information from user
     print '\n\n\nGoogle Calendar Add Event:\n'
-    xTitle = get_title()
-    xDate = get_date()
-    rTime = get_time()
-    if rTime > "":
-        xTime = rTime.split()
-        sTime = "%sT%s" % (xDate, str(xTime[0]))
-        eTime = "%sT%s" % (xDate, str(xTime[1]))
+    input_title = get_title()
+    input_date = get_date()
+    start_time, end_time = get_time()
+    if not start_time:
+        start_time = input_date
+        end_time = input_date
     else:
-        sTime = xDate
-        eTime = xDate
+		event_start = "%sT%s" (input_date, start_time)
+		event_end = "%sT%s" (input_date, end_time)
 
     #Add calendar event
-    add_event(calendar_service, xTitle, sTime, eTime)
+    add_event(calendar_service, input_title, event_start, event_end)
 
 
     print xTitle, sTime, eTime
