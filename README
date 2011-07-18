@@ -1,21 +1,23 @@
-Google Calendar Quick
+Google Calendar Add Event
  - Chevee Dodd
  e: cheveedodd at gmail dot com
 
 
 VERSION INFORMATION
 -------------------
+0.1.0 - added credentials.cml file handler separating credentials from log
+0.1.0 - Initial commit
 
-Initial commit - 0.1.0
 
-Developmental version
+Developmental version only.  I'm not responsible for damages.
 
 
 FEATURES
 --------
 
 Offers Google Calendar event adding through simple command line interface.
-Uses base64 encodig for username/password stored in individual log files.
+Uses base64 encodig for username/password stored in credentials file as well
+as logging.
 
 
 NOTES
@@ -36,18 +38,25 @@ In the future, I hope to include:
 LICENSE
 -------
 
-This project is officially Do With It What You Will.  If you do want to work on 
-it, I'd appreciate help, otherwise, if you find anything useful in here, have at
-it.  If you make a ton of money, I'd like some credit...
+This project is officially Do With It What You Will.  If you do want to work on
+it, I'd appreciate help, otherwise, if you find anything useful in here, have
+at it.  I'd like credit, if you feel like giving it to me.
 
 
 INSTALL
 -------
-You must have the Google Calendar API for Python installed. 
-  http://code.google.com/p/gdata-python-client/downloads/list 
+You must have the Google Calendar API for Python installed.
+  http://code.google.com/p/gdata-python-client/downloads/list
 
-1. Copy gc2.py to any directory
+1. copy gc2.py to any directory
 2. mkdir /data in working directory
-3. create work.log file in working directory.  This file must contain the Google
-   email address associated with the account on the first line and the password
-   on the second line.  Both of these need to be encoded in base64 first.
+3. create empty work.log file in /data
+4. create credentials.cml in /data.  Each set of credentials must be three
+   lines.  The first line of a set will be the identifier in all caps.  The
+   second and third lines will be the login and password respectively, both
+   encoded in base64.  (note: indentation not required)
+   example:
+
+   WORK
+       dXNlcm5hbWU=
+       cGFzc3dvcmQ=

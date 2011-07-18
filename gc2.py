@@ -1,5 +1,5 @@
 #! /usr/bin/python
-# Google Calendar Command Line Quick-Add v0.1.0
+# Google Calendar Add Event v0.1.1
 # 2011 Chevee Dodd
 """Command line utility utilizing Google Calendar API."""
 
@@ -23,9 +23,11 @@ def load_credentials():
             if line.strip() == "WORK"():
                 username = f.readline()
                 password = f.readline()
-            print one, two
-        line = f.readline()
+            else:
+                line = f.readline()
 
+    username = base64.b64decode(username)
+    password = base64.b64decode(password)
     return username, password
 
 def get_title():
@@ -80,8 +82,7 @@ def add_event(calendar_service, title, event_start, event_end):
     """Generate calendar event and send to Google
 
     This is ripped this straight from Google examples.  I'm sure it
-    could be done differently.  The URLs are appended to the log file
-    containing the user data."""
+    could be done differently.  The URLs are appended to the log file."""
     event = gdata.calendar.CalendarEventEntry()
     event.title = atom.Title(text=title)
     event.when.append(gdata.calendar.When(start_time=event_start, end_time=event_end))
@@ -101,7 +102,7 @@ def add_event(calendar_service, title, event_start, event_end):
     out_File.close()
 
 def main():
-    """Google Calendar Quick v0.1.0
+    """Google Calendar Add  Event v0.1.1
 
     This utility is designed to add an event to Google Calendar with a
     minimal amount of effort.  User login information is stored in a
@@ -110,10 +111,10 @@ def main():
     first line must contain the users email and the second line must
     contain the users password.  Both must be encoded in base64."""
     # Build Google login information
-    a_Creds = load_credentials()
+    username, password = load_credentials()
     calendar_service = gdata.calendar.service.CalendarService()
-    calendar_service.email = base64.b64decode(a_Creds[0])
-    calendar_service.password = base64.b64decode(a_Creds[1])
+    calendar_service.email = username
+    calendar_service.password = password
     calendar_service.source = 'gc2.py'
 
     #Get calendar information from user
