@@ -20,11 +20,10 @@ def load_credentials():
     with open('./data/credentials.cml', 'r') as f:
         line = f.readline()
         while line:
-            if line.strip() == "WORK"():
+            if line.strip() == "WORK":
                 username = f.readline()
                 password = f.readline()
-            else:
-                line = f.readline()
+            line = f.readline()
 
     username = base64.b64decode(username)
     password = base64.b64decode(password)
