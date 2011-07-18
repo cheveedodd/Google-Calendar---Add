@@ -10,6 +10,8 @@ import gdata.calendar
 import atom
 import base64
 import time
+import os
+
 
 def load_credentials():
     """Get login information from credentials.cml.
@@ -29,6 +31,7 @@ def load_credentials():
     password = base64.b64decode(password)
     return username, password
 
+
 def get_title():
     """Get calendar Title from user.
 
@@ -38,6 +41,7 @@ def get_title():
         title = raw_input('Title? > ')
 
     return title
+
 
 def get_date():
     """Get date from user
@@ -56,6 +60,7 @@ def get_date():
         input_day = time.strftime('%Y-%m-%d')
 
     return input_day
+
 
 def get_time():
     """Get time from user
@@ -76,6 +81,7 @@ def get_time():
     end_time = '%s:%s:00' % (end_time[:2], end_time[2:])
 
     return start_time, end_time
+
 
 def add_event(calendar_service, title, event_start, event_end):
     """Generate calendar event and send to Google
@@ -100,6 +106,20 @@ def add_event(calendar_service, title, event_start, event_end):
     out_File.write('\n')
     out_File.close()
 
+
+def first_run():
+    print "This is your first time using Google Calendar Add Event."
+    print "Let's set up the software by building your credentials file."
+    print "\nWhen entering your email address, you must use your full login"
+    print "address, including domain name.  ex: username@gmail.com"
+    username = raw_input('Enter email > ')
+    password = raw_input('Enter password > ')
+    with open('./data/credentials.cml', 'w') as out_file:
+        out_file.write('WORK\n')
+        out_file.write('    %s\n' % (base64.b64encode(username)))
+        out_file.write('    %s\n' % (base64.b64encode(password)))
+        out_file.write('\n')
+
 def main():
     """Google Calendar Add  Event v0.1.1
 
@@ -107,6 +127,8 @@ def main():
     minimal amount of effort.  User login information is stored in
     ./data/credentails.cml and is stored encoded with base64.  Calendar
     events are written to ./data/work.log as plain text.  See README"""
+    if not os.path.exists('./data'):
+        os.makedirs('./data')
     # Build Google login information
     username, password = load_credentials()
     calendar_service = gdata.calendar.service.CalendarService()
@@ -135,4 +157,10 @@ def main():
 
 
 if __name__ == '__main__':
+    if not os.path.exists('./data'):
+        os.makedirs('./data')
+
+    if not os.path.exists('./data/credentials.cml'):
+        first_run()
+
     main()
