@@ -106,7 +106,7 @@ def main():
     This utility is designed to add an event to Google Calendar with a
     minimal amount of effort.  User login information is stored in
     ./data/credentails.cml and is stored encoded with base64.  Calendar
-    events are written to ./data/work.log as plain text."""
+    events are written to ./data/work.log as plain text.  See README"""
     # Build Google login information
     username, password = load_credentials()
     calendar_service = gdata.calendar.service.CalendarService()
