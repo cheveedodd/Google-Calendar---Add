@@ -106,7 +106,7 @@ def main():
     # Build Google login information
     a_Creds = load_credentials()
     calendar_service = gdata.calendar.service.CalendarService()
-    calendar_service.email = base64.b64decodehttp://www.yahoo.com/(a_Creds[0])
+    calendar_service.email = base64.b64decode(a_Creds[0])
     calendar_service.password = base64.b64decode(a_Creds[1])
     calendar_service.source = 'gc2.py'
 
