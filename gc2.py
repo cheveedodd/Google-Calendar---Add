@@ -30,7 +30,7 @@ def get_title():
     while (title == ''):
         title = raw_input('Title? > ')
 
-    return a_Title
+    return title
 
 def get_date():
     """Get date from user
@@ -60,7 +60,7 @@ def get_time():
     print 'Enter times in 24 hour format: HHmm'
     start_time = raw_input('Start time? [All day] > ')
     if not start_time:
-        return ''
+        return '', ''
     else:
         end_time = raw_input('End time? > ')
 
@@ -116,11 +116,11 @@ def main():
     input_date = get_date()
     start_time, end_time = get_time()
     if not start_time:
-        start_time = input_date
-        end_time = input_date
+        event_start = input_date
+        event_end = input_date
     else:
-		event_start = "%sT%s" (input_date, start_time)
-		event_end = "%sT%s" (input_date, end_time)
+		event_start = "%sT%s" % (input_date, start_time)
+		event_end = "%sT%s" % (input_date, end_time)
 
     #Add calendar event
     add_event(calendar_service, input_title, event_start, event_end)
