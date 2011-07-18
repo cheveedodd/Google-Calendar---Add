@@ -70,7 +70,7 @@ def get_time():
 
     return start_time, end_time
 
-def add_event(calendar_service, title, start_time, end_time):
+def add_event(calendar_service, title, event_start, event_end):
     """Generate calendar event and send to Google
 
     This is ripped this straight from Google examples.  I'm sure it
@@ -78,7 +78,7 @@ def add_event(calendar_service, title, start_time, end_time):
     containing the user data."""
     event = gdata.calendar.CalendarEventEntry()
     event.title = atom.Title(text=title)
-    event.when.append(gdata.calendar.When(start_time=start_time, end_time=end_time))
+    event.when.append(gdata.calendar.When(start_time=event_start, end_time=event_end))
     calendar_service.ProgrammaticLogin()
 
     # Send the request and receive the response:
@@ -87,7 +87,7 @@ def add_event(calendar_service, title, start_time, end_time):
     print 'New event added.  Check log file for link details.\n'
     # Build log as flat file for prosterity!
     out_File = open('./data/work.log', 'a')
-    out_File.write('%s - %s\n' % (start_time, title))
+    out_File.write('%s - %s\n' % (event_start, title))
     out_File.write('%s\n' % (new_event.id.text))
     out_File.write('%s\n' % (new_event.GetEditLink().href))
     out_File.write('%s\n' % (new_event.GetHtmlLink().href))
@@ -106,7 +106,7 @@ def main():
     # Build Google login information
     a_Creds = load_credentials()
     calendar_service = gdata.calendar.service.CalendarService()
-    calendar_service.email = base64.b64decode(a_Creds[0])
+    calendar_service.email = base64.b64decodehttp://www.yahoo.com/(a_Creds[0])
     calendar_service.password = base64.b64decode(a_Creds[1])
     calendar_service.source = 'gc2.py'
 
