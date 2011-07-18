@@ -126,7 +126,7 @@ def main():
     add_event(calendar_service, input_title, event_start, event_end)
 
 
-    print xTitle, sTime, eTime
+    print input_title, event_start, event_end
     print "\nEnd of line."
 
 
