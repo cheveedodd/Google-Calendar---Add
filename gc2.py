@@ -88,17 +88,21 @@ def add_event(username, password, title, event_start, event_end):
 
     This is ripped this straight from Google examples.  I'm sure it
     could be done differently.  The URLs are appended to the log file."""
+    #build calendar service to pass to Google
     calendar_service = gdata.calendar.service.CalendarService()
     calendar_service.email = username
     calendar_service.password = password
     calendar_service.source = 'gc2.py'
 
+    #build event data to pass to Google
     event = gdata.calendar.CalendarEventEntry()
     event.title = atom.Title(text=title)
     event.when.append(gdata.calendar.When(start_time=event_start, end_time=event_end))
+
+    #log in to Google
     calendar_service.ProgrammaticLogin()
 
-    # Send the request and receive the response:
+    # Send the request and receive the response
     new_event = calendar_service.InsertEvent(event, '/calendar/feeds/default/private/full')
 
     print 'New event added.  Check log file for link details.\n'
@@ -135,7 +139,6 @@ def main():
 
     # Build Google login information
     username, password = load_credentials()
-
 
     #Get calendar information from user
     print '\n\n\nGoogle Calendar Add Event:\n'
