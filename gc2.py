@@ -98,13 +98,11 @@ def add_event(calendar_service, title, event_start, event_end):
 
     print 'New event added.  Check log file for link details.\n'
     # Build log as flat file for prosterity!
-    out_File = open('./data/work.log', 'a')
-    out_File.write('%s - %s\n' % (event_start, title))
-    out_File.write('%s\n' % (new_event.id.text))
-    out_File.write('%s\n' % (new_event.GetEditLink().href))
-    out_File.write('%s\n' % (new_event.GetHtmlLink().href))
-    out_File.write('\n')
-    out_File.close()
+    with open('./data/work.log', 'a') as out_file:
+        out_file.write('%s - %s\n' % (event_start, title))
+        out_file.write('%s\n' % (new_event.id.text))
+        out_file.write('%s\n' % (new_event.GetEditLink().href))
+        out_file.write('%s\n\n' % (new_event.GetHtmlLink().href))
 
 
 def first_run():
@@ -117,8 +115,8 @@ def first_run():
     with open('./data/credentials.cml', 'w') as out_file:
         out_file.write('WORK\n')
         out_file.write('    %s\n' % (base64.b64encode(username)))
-        out_file.write('    %s\n' % (base64.b64encode(password)))
-        out_file.write('\n')
+        out_file.write('    %s\n\n' % (base64.b64encode(password)))
+
 
 def main():
     """Google Calendar Add  Event v0.1.1
