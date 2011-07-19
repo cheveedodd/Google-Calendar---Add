@@ -116,14 +116,13 @@ def add_event(username, password, title, event_start, event_end):
         out_file.write('%s\n\n' % (new_event.GetHtmlLink().href))
 
 
-def first_run():
+def add_user(reason):
     """Build credentials.cml file
 
     Currently this module builds the credentials file for only a single
     login/password pair."""
-    print "This is your first time using Google Calendar Add Event."
-    print "Let's set up the software by building your credentials file."
-    print "\nWhen entering your email address, you must use your full login"
+    print reason
+    print "When entering your email address, you must use your full login"
     print "address, including domain name.  ex: username@gmail.com"
     username = raw_input('Enter email > ')
 
@@ -177,6 +176,7 @@ if __name__ == '__main__':
         os.makedirs('./data')
 
     if not os.path.exists('./data/credentials.cml'):
-        first_run()
+        add_user('''This is the first time you've run Google Calendar Add Event.
+Let's set up the software by building your credentials file.\n''')
 
     main()
