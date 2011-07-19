@@ -1,10 +1,12 @@
 Google Calendar Add Event
- - Chevee Dodd
+ - Chevee Dodd 2011
  e: cheveedodd at gmail dot com
 
 
 VERSION INFORMATION
 -------------------
+0.1.2 - added check for data structure and build directory if not present
+      - build credentials.cml with user input email/password pair
 0.1.1 - added credentials.cml file handler separating credentials from log
 0.1.0 - Initial commit
 
@@ -31,7 +33,6 @@ In the future, I hope to include:
   - error handling (currently there is exactly zero)
   - passable argument for multiple calendar support (or a menu)
   - intelligent date/time processing that accepts multiple input formats
-  - automatic log generation if none is present
   - automatic log control for oversize logs or by date
 
 
@@ -49,14 +50,4 @@ You must have the Google Calendar API for Python installed.
   http://code.google.com/p/gdata-python-client/downloads/list
 
 1. copy gc2.py to any directory
-2. mkdir /data in working directory
-3. create empty work.log file in /data
-4. create credentials.cml in /data.  Each set of credentials must be three
-   lines.  The first line of a set will be the identifier in all caps.  The
-   second and third lines will be the login and password respectively, both
-   encoded in base64.  (note: indentation not required)
-   example:
-
-   WORK
-       dXNlcm5hbWU=
-       cGFzc3dvcmQ=
+2. run - follow directions

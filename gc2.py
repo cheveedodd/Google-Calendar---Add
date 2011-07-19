@@ -115,6 +115,10 @@ def add_event(username, password, title, event_start, event_end):
 
 
 def first_run():
+    """Build credentials.cml file
+
+    Currently this module builds the credentials file for only a single
+    login/password pair."""
     print "This is your first time using Google Calendar Add Event."
     print "Let's set up the software by building your credentials file."
     print "\nWhen entering your email address, you must use your full login"
@@ -128,16 +132,13 @@ def first_run():
 
 
 def main():
-    """Google Calendar Add  Event v0.1.1
+    """Google Calendar Add  Event v0.1.2
 
     This utility is designed to add an event to Google Calendar with a
     minimal amount of effort.  User login information is stored in
     ./data/credentails.cml and is stored encoded with base64.  Calendar
     events are written to ./data/work.log as plain text.  See README"""
-    if not os.path.exists('./data'):
-        os.makedirs('./data')
-
-    # Build Google login information
+    #Get Google login information from file
     username, password = load_credentials()
 
     #Get calendar information from user
