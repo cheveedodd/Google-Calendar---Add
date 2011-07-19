@@ -83,11 +83,16 @@ def get_time():
     return start_time, end_time
 
 
-def add_event(calendar_service, title, event_start, event_end):
+def add_event(username, password, title, event_start, event_end):
     """Generate calendar event and send to Google
 
     This is ripped this straight from Google examples.  I'm sure it
     could be done differently.  The URLs are appended to the log file."""
+    calendar_service = gdata.calendar.service.CalendarService()
+    calendar_service.email = username
+    calendar_service.password = password
+    calendar_service.source = 'gc2.py'
+
     event = gdata.calendar.CalendarEventEntry()
     event.title = atom.Title(text=title)
     event.when.append(gdata.calendar.When(start_time=event_start, end_time=event_end))
@@ -127,12 +132,10 @@ def main():
     events are written to ./data/work.log as plain text.  See README"""
     if not os.path.exists('./data'):
         os.makedirs('./data')
+
     # Build Google login information
     username, password = load_credentials()
-    calendar_service = gdata.calendar.service.CalendarService()
-    calendar_service.email = username
-    calendar_service.password = password
-    calendar_service.source = 'gc2.py'
+
 
     #Get calendar information from user
     print '\n\n\nGoogle Calendar Add Event:\n'
@@ -147,7 +150,7 @@ def main():
         event_end = "%sT%s" % (input_date, end_time)
 
     #Add calendar event
-    add_event(calendar_service, input_title, event_start, event_end)
+    add_event(username, password, input_title, event_start, event_end)
 
 
     print input_title, event_start, event_end
