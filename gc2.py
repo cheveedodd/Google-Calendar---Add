@@ -1,5 +1,5 @@
 #! /usr/bin/python
-# Google Calendar Add Event v0.1.1
+# Google Calendar Add Event v0.1.2
 # 2011 Chevee Dodd
 """Command line utility utilizing Google Calendar API."""
 
@@ -11,6 +11,8 @@ import atom
 import base64
 import time
 import os
+import sys
+import getpass
 
 
 def load_credentials():
@@ -124,7 +126,16 @@ def first_run():
     print "\nWhen entering your email address, you must use your full login"
     print "address, including domain name.  ex: username@gmail.com"
     username = raw_input('Enter email > ')
-    password = raw_input('Enter password > ')
+
+    password = ''
+    while not password:
+        first_pass = getpass.getpass('Enter password > ')
+        second_pass = getpass.getpass('Re-enter password > ')
+        if first_pass == second_pass:
+            password = first_pass
+        else:
+            print 'Password missmatch.'
+
     with open('./data/credentials.cml', 'w') as out_file:
         out_file.write('WORK\n')
         out_file.write('    %s\n' % (base64.b64encode(username)))
