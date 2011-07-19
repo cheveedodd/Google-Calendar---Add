@@ -15,16 +15,16 @@ import sys
 import getpass
 
 
-def load_credentials():
-    """Get login information from credentials.cml.
+def load_credentials(account='WORK'):
+    """Get login information from file and return username/password.
 
-    Future plans include passable argument to replace 'WORK' or a
-    menu system for selecting different accounts.  Also - error
-    handling.  CML = Credentials Markup Language - because I can."""
+    arguments:
+    account -- user defined name for credential set (default: WORK)
+    """
     with open('./data/credentials.cml', 'r') as f:
         line = f.readline()
         while line:
-            if line.strip() == "WORK":
+            if line.strip() == account:
                 username = f.readline()
                 password = f.readline()
             line = f.readline()
@@ -35,9 +35,10 @@ def load_credentials():
 
 
 def get_title():
-    """Get calendar Title from user.
+    """Get calendar Title from user return string.
 
-    Format as raw to allow time and date entry."""
+    Format as raw to allow time and date in Google event title.
+    """
     title = ''
     while (title == ''):
         title = raw_input('Title? > ')
@@ -46,7 +47,7 @@ def get_title():
 
 
 def get_date():
-    """Get date from user
+    """Get date from user return string.
 
     Input format must be yyyy-mm-dd
     Return current date if nothing is entered.
@@ -55,7 +56,8 @@ def get_date():
     instead of a forced format.  I like Googles quick-add parsing but
     it prevents me from puting dates or times in the event title
     without enclosing it in quotes - which would be fine if the quotes
-    were stripped out by the quick-add function."""
+    were stripped out by the quick-add function.
+    """
     input_day = raw_input('Day? YYYY-MM-DD [Today] > ')
 
     if not input_day:
@@ -65,12 +67,11 @@ def get_date():
 
 
 def get_time():
-    """Get time from user
+    """Get time information from user.  Return two strings.
 
     Input format must be either HH:MM:SS or HH:MM
     Return empty if nothing is entered.
-
-    Future plans are automatic parsing of different input formats."""
+    """
     print 'Enter times in 24 hour format: HHmm'
     start_time = raw_input('Start time? [All day] > ')
     if not start_time:
@@ -86,10 +87,15 @@ def get_time():
 
 
 def add_event(username, password, title, event_start, event_end):
-    """Generate calendar event and send to Google
+    """Generate calendar event and send to Google.
 
-    This is ripped this straight from Google examples.  I'm sure it
-    could be done differently.  The URLs are appended to the log file."""
+    arguments:
+    username -- fully qualified address eg username@domain.com as string
+    password -- password as string
+    title -- event title as string
+    event_start -- starting date/time as string YYYY-mm-ddTHH:mm:ss
+    event_end -- ending date/time as string YYYY-mm-ddTHH:mm:ss
+    """
     #build calendar service to pass to Google
     calendar_service = gdata.calendar.service.CalendarService()
     calendar_service.email = username
@@ -116,11 +122,17 @@ def add_event(username, password, title, event_start, event_end):
         out_file.write('%s\n\n' % (new_event.GetHtmlLink().href))
 
 
-def add_user(reason):
-    """Build credentials.cml file
+def add_user(reason, account='WORK'):
+    """Add user to credentials file.
+
+    arguments:
+    reason -- additional instructions passed to user as string
+    account -- user defined name for credential set (default: WORK)
 
     Currently this module builds the credentials file for only a single
-    login/password pair."""
+    login/password pair if rain against a previously built file it will
+    overwrite any data in that file.
+    """
     print reason
     print "When entering your email address, you must use your full login"
     print "address, including domain name.  ex: username@gmail.com"
@@ -136,8 +148,8 @@ def add_user(reason):
             print 'Password missmatch.'
 
     with open('./data/credentials.cml', 'w') as out_file:
-        out_file.write('WORK\n')
-        out_file.write('    %s\n' % (base64.b64encode(username)))
+        out_file.write(account)
+        out_file.write('\n    %s\n' % (base64.b64encode(username)))
         out_file.write('    %s\n\n' % (base64.b64encode(password)))
 
 
