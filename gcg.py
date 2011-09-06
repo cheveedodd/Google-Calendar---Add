@@ -35,16 +35,13 @@ def load_credentials(account='WORK'):
     return username, password
 
 def get_date(date_request):
-    """Get starting date from user return string.
+    """Get date from user return string.
 
     Input format must be yyyy-mm-dd
     Return current date if nothing is entered.
 
-    Future plans are to include functions to parse various formats
-    instead of a forced format.  I like Googles quick-add parsing but
-    it prevents me from puting dates or times in the event title
-    without enclosing it in quotes - which would be fine if the quotes
-    were stripped out by the quick-add function.
+    arguments:
+    date_request -- String containing date request reason
     """
     input_day = raw_input(date_request + ' Date? YYYY-MM-DD [Today] > ')
 
@@ -59,9 +56,8 @@ def get_event(username, password, file_name, start_date, end_date):
     arguments:
     username -- fully qualified address eg username@domain.com as string
     password -- password as string
-    title -- event title as string
-    event_start -- starting date/time as string YYYY-mm-ddTHH:mm:ss
-    event_end -- ending date/time as string YYYY-mm-ddTHH:mm:ss
+    start_date -- starting date as string YYYY-mm-dd
+    end_dater -- ending date as string YYYY-mm-dd
     """
     #build calendar service to pass to Google
     calendar_service = gdata.calendar.service.CalendarService(source='gcg.py')
