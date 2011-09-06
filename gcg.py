@@ -1,6 +1,11 @@
 #! /usr/bin/python
 # Google Calendar Get Event v0.0.1
 # 2011 Chevee Dodd
+#
+# This is a temporary module to test the event query code.  I repurposed
+# the original Event adding module for this purpose.  This will be
+# eventually merged with the Add Event module.
+
 """Command line utility utilizing Google Calendar API."""
 
 import gdata.calendar.service
