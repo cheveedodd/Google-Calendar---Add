@@ -85,16 +85,6 @@ def get_event(username, password, file_name, start_date, end_date):
             print '\t\tStart time: %s' % (a_when.start_time,)
             print '\t\tEnd time:   %s' % (a_when.end_time,)
 
-
-    #print 'New event added.  Check log file for link details.\n'
-    # Build log as flat file for prosterity!
-    #with open('./data/work.log', 'a') as out_file:
-    #    out_file.write('%s - %s\n' % (event_start, title))
-    #    out_file.write('%s\n' % (new_event.id.text))
-    #    out_file.write('%s\n' % (new_event.GetEditLink().href))
-    #    out_file.write('%s\n\n' % (new_event.GetHtmlLink().href))
-
-
 def add_user(reason, account='WORK'):
     """Add user to credentials file.
 
