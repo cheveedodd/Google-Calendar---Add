@@ -5,7 +5,7 @@ Google Calendar Add Event
 ! IMPORTANT !
 -------------
 This version of Add and Get runs against v2.0 of Google's API.  Google has
-introduced v3.0 as of 11/04/2011 and deprecated v2.  I am working on a build
+introduced v3.0 as of 11/17/2011 and deprecated v2.  I am working on a build
 using the new API but this one will work for as long as Google supports v2.
 
 VERSION INFORMATION
