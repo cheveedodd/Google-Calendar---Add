@@ -74,6 +74,7 @@ def get_event(username, password, file_name, start_date, end_date):
     query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full')
     query.start_min = start_date
     query.start_max = end_date
+    query.max_results = 60
     print 'Date range query for events: %s to %s' % (start_date, end_date,)
 
     # Send the request and receive the response
