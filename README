@@ -40,6 +40,11 @@ In the future, I hope to include:
   - intelligent date/time processing that accepts multiple input formats
   - automatic log control for oversize logs or by date
 
+I have included a query tool that utilizes the same authentication method that
+is used by the Add tool.  If you want to run a query for events against a date
+range, you can use gcg.py for that purpose.  It is a test and will be
+incorporated into future builds as a command line option.
+
 
 LICENSE
 -------
