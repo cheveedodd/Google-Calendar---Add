@@ -1,5 +1,7 @@
 #! /usr/bin/python
 # Google Calendar Get Event v0.0.1
+# This code runs against Google Calendar API v2.1 which is deprecated
+# as of 11/4/2011 - use with caution.
 # 2011 Chevee Dodd
 #
 # This is a temporary module to test the event query code.  I repurposed

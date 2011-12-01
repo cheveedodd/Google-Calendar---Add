@@ -1,5 +1,7 @@
 #! /usr/bin/python
 # Google Calendar Add Event v0.1.2
+# This code runs against Google Calendar API v2.1 which is deprecated
+# as of 11/4/2011 - use with caution.
 # 2011 Chevee Dodd
 """Command line utility utilizing Google Calendar API."""
 
