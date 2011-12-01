@@ -1,6 +1,6 @@
 #! /usr/bin/python
 # Google Calendar Add Event v0.1.2
-# This code runs against Google Calendar API v2.1 which is deprecated
+# This code runs against Google Calendar API v2 which is deprecated
 # as of 11/17/2011 - use with caution.
 # 2011 Chevee Dodd
 """Command line utility utilizing Google Calendar API."""
@@ -132,7 +132,7 @@ def add_user(reason, account='WORK'):
     account -- user defined name for credential set (default: WORK)
 
     Currently this module builds the credentials file for only a single
-    login/password pair if rain against a previously built file it will
+    login/password pair if ran against a previously built file it will
     overwrite any data in that file.
     """
     print reason
